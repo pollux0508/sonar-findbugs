@@ -25,7 +25,7 @@ jobs:
   include:
     - stage: smoke-test
       script:
-        - docker-compose run maven
+        - 'mvn package && docker-compose run maven'
     - stage: analysis
       if: ( type = pull_request and head_repo =~ ^spotbugs/ ) or ( type != pull_request and repo =~ ^spotbugs/ )
       script:
