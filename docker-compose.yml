@@ -1,0 +1,14 @@
+version: '3'
+services:
+  sonarqube:
+    build: .
+    expose:
+      - 9000
+  maven:
+    image: 'maven:3.6.0-jdk-8-alpine'
+    volumes:
+      - './smoke-test.sh:/tmp/smoke-test.sh:ro'
+      - '~/.m2:/root/.m2:ro'
+    entrypoint: /tmp/smoke-test.sh
+    depends_on:
+      - sonarqube
