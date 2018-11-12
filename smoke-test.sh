@@ -16,7 +16,7 @@ done
 echo SonarQube has been launched.
 
 count=0
-until mvn sonar:sonar -B -Dsonar.host.url=http://localhost:9000 -Dsonar.login=admin -Dsonar.password=admin; do
+until SONAR_SCANNER_HOME="" mvn sonar:sonar -B -Dsonar.host.url=http://localhost:9000 -Dsonar.login=admin -Dsonar.password=admin; do
     count=$[$count+1]
     if [ $count -ge 5 ]; then
       echo Sonar fails to scan 5 times!
