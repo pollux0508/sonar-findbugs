@@ -22,7 +22,7 @@ function run_smoke_test() {
   echo SonarQube has been launched.
 
   count=0
-  until SONAR_SCANNER_HOME="" mvn compile org.sonarsource.scanner.maven:sonar-maven-plugin:3.5.0.1254:sonar -B -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=admin -Dsonar.password=admin; do
+  until SONAR_SCANNER_HOME="" mvn compile org.sonarsource.scanner.maven:sonar-maven-plugin:3.5.0.1254:sonar -B -Dsonar.profile="FindBugs + FB-Contrib" -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=admin -Dsonar.password=admin; do
     count=$[ $count + 1 ]
     if [ $count -ge 5 ]; then
       echo Sonar fails to scan 5 times!
