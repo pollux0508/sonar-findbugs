@@ -22,7 +22,7 @@ function run_smoke_test() {
   echo SonarQube has been launched.
 
   count=0
-  until SONAR_SCANNER_HOME="" mvn package org.sonarsource.scanner.maven:sonar-maven-plugin:3.5.0.1254:sonar -B -Dsonar.profile="FindBugs + FB-Contrib" -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=admin -Dsonar.password=admin; do
+  until SONAR_SCANNER_HOME="" mvn package org.sonarsource.scanner.maven:sonar-maven-plugin:3.5.0.1254:sonar -B -DskipTests -Dsonar.profile="FindBugs + FB-Contrib" -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=admin -Dsonar.password=admin; do
     count=$[ $count + 1 ]
     if [ $count -ge 5 ]; then
       echo Sonar fails to scan 5 times!
@@ -34,5 +34,5 @@ function run_smoke_test() {
 }
 
 # Use the project that uses Maven and contains .jsp file
-download_target_project 'https://github.com/apache/jspwiki.git' 'jspwiki_2_10_2'
+download_target_project 'https://github.com/spring-projects/spring-petclinic.git' 'master'
 run_smoke_test
